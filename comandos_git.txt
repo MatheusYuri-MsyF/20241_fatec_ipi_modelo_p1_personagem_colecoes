@@ -31,3 +31,13 @@ git commit -m "docs(p1): inclui arquivo README.md"
 //
 
 git branch -M main
+
+// 
+
+git commit -m "docs(p1): cria arquivo para comandos git"
+
+// 
+
+git push -u origin main
+
+//

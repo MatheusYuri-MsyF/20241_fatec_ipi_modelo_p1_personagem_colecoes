@@ -35,6 +35,7 @@ public class Personagem{
     else{
       System.out.printf("%s sem energia para cacar...\n", nome);
     }
+    verificarMorte();
     fome = Math.min(fome + 1, 10);
     //resolver com o ternário
     sono = sono < 10 ? sono + 1 : sono;
@@ -55,6 +56,7 @@ public class Personagem{
           --fome;
           energia = (energia == 10 ? energia : energia + 1);
       }
+      verificarMorte();
   }
 
   void dormir(){
@@ -66,8 +68,18 @@ public class Personagem{
     else{
       System.out.printf("%s sem sono...\n", nome);
     }
+    verificarMorte();
   }
 
+  void verificarMorte() {
+    if (energia <= 0) {
+      System.out.printf("%s morreu por falta de energia.\n", nome);
+      System.exit(0); // Encerra o programa
+    }
+  }
+
+
+@Override
   public String toString(){
     return String.format(
       "%s: (e:%d, f:%d, s:%d)",
