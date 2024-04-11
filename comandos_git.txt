@@ -1,0 +1,33 @@
+// O comando "git init" inicializa o git no projeto
+
+git init
+
+// O comando "git clone" clona um repositório, que no caso é o repositório:
+// "https://github.com/MatheusYuri-MsyF/20241_fatec_ipi_modelo_p1_personagem_colecoes"
+// Já o "." utilizado é para clonar tudo que está dentro do repositório antes mencionado.
+
+git clone https://github.com/MatheusYuri-MsyF/20241_fatec_ipi_modelo_p1_personagem_colecoes .
+
+// O comando "git status" 
+
+git status 
+
+//
+
+git add .
+
+//
+
+git config --local user.name "Matheus Yuri"
+
+//
+
+git config --local user.email "msyf.business@gmail.com"
+
+//
+
+git commit -m "docs(p1): inclui arquivo README.md"
+
+//
+
+git branch -M main
