@@ -40,4 +40,18 @@ git commit -m "docs(p1): cria arquivo para comandos git"
 
 git push -u origin main
 
+// Para verificar depois das alterações...
+
+git status 
+
+// 
+
+git add .
+
+// 
+
+git commit - m "feat(p1): implementa armazenamento de itens"
+
 //
+
+git push -u origin main

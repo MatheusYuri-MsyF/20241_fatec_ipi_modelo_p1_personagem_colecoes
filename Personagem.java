@@ -67,19 +67,14 @@ public class Personagem{
   }
 
   void comer() {
-    //se tiver fome
-      //comer e reduzir o valor de fome de 1
-      //aumentar o valor de energia de 1
-    //caso contrario
-      //so vai avisar que esta sem fome
-      switch(fome){
-        case 0:
-          System.out.printf("%s sem fome....\n", nome);
-          break;
-        default:
-          System.out.printf("%s comendo...\n", nome);
-          --fome;
-          energia = (energia == 10 ? energia : energia + 1);
+    if (inventario.estaVazio()) {
+      System.out.printf("%s não tem itens para comer\n", nome);
+    }
+    else {
+      String itemComido = inventario.removerNoFinal();
+      System.out.printf("%s está comendo %s\n", nome, itemComido);
+      fome = Math.max(fome - 1, 0);
+      energia = Math.min(energia + 1, 10);
       }
       verificarMorte();
   }

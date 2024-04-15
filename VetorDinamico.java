@@ -70,8 +70,15 @@ public class VetorDinamico {
     return qtde;
   }
 
-  void removerNoFinal(){
-
+  String removerNoFinal(){
+    if (estaVazio()) {
+      return null;  // Retorna nulo se o vetor está vazio.
+    } else {
+      String item = elementos[qtde - 1];  // Pega o último item.
+      elementos[qtde - 1] = null;  // Remove o item.
+      qtde--;  // Reduz a quantidade de elementos.
+      return item;  // Retorna o item removido.
+    }
   }
 
   boolean estaVazio(){
