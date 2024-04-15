@@ -6,19 +6,29 @@ public class Personagem{
   int energia;
   private int fome;
   private int sono;
+  private VetorDinamico inventario;
+  private static final String[] ITENS_POSSIVEIS = {
+    "Javali selvagem", "amora", "batata frita", "cogumelo", "mel"
+  };
+  
+
+  
 
   //esse é o construtor padrão
   //criado automaticamente pelo compilador, ainda que não seja escrito explicitamente
   Personagem(){
-    nome = null;
+    nome = "Matheus";
     energia = 10;
     fome = 0;
     sono = 0;
+    inventario = new VetorDinamico();
+    itens_iniciais();
   }
 
   //construtor personalizado
   //o que viabiliza a sua existência é a sobrecarga de construtores
   Personagem(int energia, int fome, int sono){
+    this();
     if (energia >= 0 && energia <= 10)
       this.energia = energia;
     if (fome >= 0 && fome <= 10)
@@ -27,10 +37,25 @@ public class Personagem{
       this.sono = sono;
   }
 
+  void itens_iniciais(){
+    for (int i = 0; i < 4; i++) {
+      int aleatorio  = (int) (Math.random() * 5);
+      String item = ITENS_POSSIVEIS[aleatorio];
+      inventario.adicionar(item);
+    }{
+
+    }
+  }
+
+
   void cacar(){
     if(energia >= 2){
       System.out.printf("%s esta cacando...\n", nome);
       energia -= 2; // energia = energia - 2;
+      int aleatorio = (int) (Math.random() * 5);
+      String item = ITENS_POSSIVEIS[aleatorio];
+      inventario.adicionar(item);
+      System.out.printf("%s encontrou um(a) %s!\n", nome, item);
     }
     else{
       System.out.printf("%s sem energia para cacar...\n", nome);
@@ -79,11 +104,32 @@ public class Personagem{
   }
 
 
+  
+
+
 @Override
-  public String toString(){
-    return String.format(
-      "%s: (e:%d, f:%d, s:%d)",
-      nome, energia, fome, sono
-    );
+public String toString() {
+  StringBuilder descricao = new StringBuilder();
+  descricao.append(String.format(
+          "%s: (e:%d, f:%d, s:%d) inv: ",
+          nome, energia, fome, sono
+  ));
+
+  // Obtém os elementos do inventário
+  String[] elementos = inventario.getElementos();
+
+  // Percorre os elementos do inventário e adiciona cada um à descrição
+  for (int i = 0; i < inventario.tamanho(); i++) {
+    descricao.append(elementos[i]);
+    if (i < inventario.tamanho() - 1) {
+      descricao.append(", ");
+    }
   }
+
+  descricao.append(" ");
+
+  return descricao.toString();
+}
+
+
 }

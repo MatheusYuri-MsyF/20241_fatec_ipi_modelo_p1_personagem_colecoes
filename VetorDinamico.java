@@ -4,24 +4,27 @@ public class VetorDinamico {
   //variáveis de instância (cada instância ou objeto tem a sua cópia)
   private int qtde;
   private int cap;
-  private int [] elementos;
+  private String [] elementos;
   //variável de classe (todas as instâncias compartilham este mesmo valor)
   private static final int CAP_MINIMA = 4;
   VetorDinamico(){
     cap = CAP_MINIMA;
     qtde = 0;
-    elementos = new int[CAP_MINIMA];
+    elementos = new String[cap];
   }
 
+
   VetorDinamico(int capMinima){
+    this();
     double aux = capMinima;
-    while (aux >= 2)
-      aux /= 2;
-    cap = aux == 1 && capMinima > 3 ? capMinima : CAP_MINIMA;
+    if (aux > CAP_MINIMA) {
+      cap = (int) aux;
+      elementos = new String[cap];
+    }
   }
 
   //terminar esse método
-  void adicionar(int elemento){
+  void adicionar(String elemento){
     //se estiver cheio, redimensionar antes de adicionar
     if(estaCheio())redimensionar();
     elementos[qtde] = elemento;
@@ -31,20 +34,17 @@ public class VetorDinamico {
   //escrever esse aqui também
   boolean estaCheio(){
     //decidir se o vetor está cheio ou não olhando para cap e qtde
-    // if(qtde == cap)
-    //   return true;
-    // return false;
-    // return qtde == cap ? true : false;
-    return qtde == cap;
+     return qtde == cap ? true : false;
+    
   }
 
   //escrever esse método
   private void redimensionar(){
     //alocar um vetor com o dobro da capacidade atual chamado auxiliar
-    int [] aux = new int[cap * 2];
+    String [] aux = new String[cap * 2];
     //copiar todo mundo do vetor elementos para o vetor auxiliar
     for(int i = 0; i < cap; i++){
-      aux[i] = elementos[i];
+       aux[i] = elementos[i];
     }
     //ajustar a capacidade para que ela tenha o valor novo, dobrado
     cap *= 2;
@@ -55,11 +55,11 @@ public class VetorDinamico {
   }
 
   //implemente esse método
-  void adicionarSemRepeticao(int e){
+  void adicionarSemRepeticao(String e){
     if(!existe(e)) adicionar(e);
   }
 
-  boolean existe(int e){
+  boolean existe(String e){
     for (int i = 0; i < qtde; i++)
       if (e == elementos[i])
         return true;
@@ -75,18 +75,18 @@ public class VetorDinamico {
   }
 
   boolean estaVazio(){
-
+      return qtde == 0 ? true : false;
   }
 
   boolean estaUmQuartoCheio(){
-    
+    return cap/2 == qtde ? true : false;
   }
 
   void reduzirTamanho(){
 
   }
 
-  int [] getElementos(){
+  String[] getElementos(){
     return Arrays.copyOf(elementos, cap);
     // return elementos;
   }
