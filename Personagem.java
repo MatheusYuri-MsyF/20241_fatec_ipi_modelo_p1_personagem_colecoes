@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Personagem{
   //variáveis de instância(objeto)
@@ -17,7 +18,7 @@ public class Personagem{
   //esse é o construtor padrão
   //criado automaticamente pelo compilador, ainda que não seja escrito explicitamente
   Personagem(){
-    nome = "Matheus";
+    nome = nomear_personagem();
     energia = 10;
     fome = 0;
     sono = 0;
@@ -27,7 +28,7 @@ public class Personagem{
 
   //construtor personalizado
   //o que viabiliza a sua existência é a sobrecarga de construtores
-  Personagem(int energia, int fome, int sono){
+  Personagem( int energia, int fome, int sono){
     this();
     if (energia >= 0 && energia <= 10)
       this.energia = energia;
@@ -35,6 +36,13 @@ public class Personagem{
       this.fome = fome;
     if (sono >= 0 && sono <= 10)
       this.sono = sono;
+  }
+
+  String nomear_personagem() {
+    System.out.println("Digite um nome para o(a) personagem:");
+    Scanner leituraTeclado = new Scanner(System.in);
+    String nome = leituraTeclado.nextLine();
+    return nome;
   }
 
   void itens_iniciais(){
@@ -98,33 +106,45 @@ public class Personagem{
     }
   }
 
-
-  
-
-
-@Override
-public String toString() {
-  StringBuilder descricao = new StringBuilder();
-  descricao.append(String.format(
-          "%s: (e:%d, f:%d, s:%d) inv: ",
-          nome, energia, fome, sono
-  ));
-
-  // Obtém os elementos do inventário
-  String[] elementos = inventario.getElementos();
-
-  // Percorre os elementos do inventário e adiciona cada um à descrição
-  for (int i = 0; i < inventario.tamanho(); i++) {
-    descricao.append(elementos[i]);
-    if (i < inventario.tamanho() - 1) {
-      descricao.append(", ");
+  public void realizarAcao(Personagem personagem){
+    int acao = (int) (Math.random() * 3);
+    switch (acao) {
+      case 0:
+        personagem.cacar();
+        break;
+      case 1:
+        personagem.comer();
+        break;
+      case 2:
+        personagem.dormir();
+        break;
     }
   }
 
-  descricao.append(" ");
 
-  return descricao.toString();
-}
 
+  @Override
+  public String toString() {
+    StringBuilder descricao = new StringBuilder();
+    descricao.append(String.format(
+            "Info. sobre %s: \n- Energia: %d \n- Fome: %d \n- Sono: %d \n- Inventario: ",
+            nome, energia, fome, sono
+    ));
+
+    // Obtém os elementos do inventário
+    String[] elementos = inventario.getElementos();
+
+    // Percorre os elementos do inventário e adiciona cada um à descrição
+    for (int i = 0; i < inventario.tamanho(); i++) {
+      descricao.append(elementos[i]);
+      if (i < inventario.tamanho() - 1) {
+        descricao.append(", ");
+      }
+    }
+
+    descricao.append(" ");
+
+    return descricao.toString();
+  }
 
 }
