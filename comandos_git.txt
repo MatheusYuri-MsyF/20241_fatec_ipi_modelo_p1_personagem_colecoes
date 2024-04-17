@@ -1,57 +1,88 @@
-// O comando "git init" inicializa o git no projeto
-
+// O comando "git init" inicializa um novo repositório Git local no diretório atual, permitindo começar a versionar o projeto.
 git init
 
-// O comando "git clone" clona um repositório, que no caso é o repositório:
-// "https://github.com/MatheusYuri-MsyF/20241_fatec_ipi_modelo_p1_personagem_colecoes"
-// Já o "." utilizado é para clonar tudo que está dentro do repositório antes mencionado.
-
+// O comando "git clone" clona um repositório remoto para o diretório local, neste caso usando "." para clonar no diretório atual.
 git clone https://github.com/MatheusYuri-MsyF/20241_fatec_ipi_modelo_p1_personagem_colecoes .
 
-// O comando "git status" 
-
+// O comando "git status" exibe o estado atual do repositório, incluindo mudanças que não foram ainda adicionadas ou commitadas.
 git status 
 
-//
-
+// O comando "git add ." adiciona todas as mudanças no diretório atual (e subdiretórios) preparando-as para o próximo commit.
 git add .
 
-//
-
+// Configura o nome do usuário localmente para o repositório atual, que será utilizado nos commits.
 git config --local user.name "Matheus Yuri"
 
-//
-
+// Configura o email do usuário localmente para o repositório atual, que será utilizado nos commits.
 git config --local user.email "msyf.business@gmail.com"
 
-//
-
+// O comando "git commit" cria um commit com as mudanças que estão na área de staging, neste caso com uma mensagem específica sobre inclusão do README.md.
 git commit -m "docs(p1): inclui arquivo README.md"
 
-//
-
+// Renomeia a branch atual para 'main', que é muitas vezes o nome padrão para a branch principal em muitos repositórios.
 git branch -M main
 
-// 
-
+// O comando "git commit" é utilizado novamente, aparentemente por engano, já que nenhum novo 'git add' foi feito desde o último commit.
 git commit -m "docs(p1): cria arquivo para comandos git"
 
-// 
-
+// O comando "git push" envia os commits da branch local 'main' para a branch remota 'main' no repositório de origem, configurando o upstream.
 git push -u origin main
 
-// Para verificar depois das alterações...
-
+// Verifica novamente o estado do repositório para visualizar mudanças pendentes.
 git status 
 
-// 
-
+// Adiciona todas as alterações pendentes à área de staging.
 git add .
 
-// 
+// Cria um commit com uma mensagem específica sobre a funcionalidade de permitir a morte do personagem.
+git commit -m "feat(p1): viabiliza morte do personagem"
 
-git commit - m "feat(p1): implementa armazenamento de itens"
-
-//
-
+// Envia o commit para o repositório remoto na branch 'main'.
 git push -u origin main
+
+// Cria uma tag 'v1.0.0' para marcar uma versão estável do jogo, com a mensagem indicando a implementação da morte do personagem.
+git tag -a v1.0.0 -m "jogo: torna a morte do personagem real"
+
+// Envia a tag 'v1.0.0' para o repositório remoto.
+git push origin v1.0.0
+
+// Adiciona novas mudanças à área de staging.
+git add .
+
+// Cria um commit com uma mensagem sobre a implementação do armazenamento de itens no jogo.
+git commit -m "implementa armazenamento de itens"
+
+// Envia o commit para a branch 'main' no repositório remoto.
+git push -u origin main
+
+// Adiciona novas mudanças à área de staging.
+git add . 
+
+// Cria um commit que implementa uma condição para a alimentação do personagem baseada na existência de itens.
+git commit -m "feat(p1): condiciona refeição a existencia de itens"
+
+// Envia o commit para a branch 'main' no repositório remoto.
+git push -u origin main
+
+// Adiciona novas mudanças à área de staging.
+git add .
+
+// Cria um commit que adiciona um segundo personagem ao jogo.
+git commit -m "feat(p1): adiciona segundo personagem"
+
+// Envia o commit para a branch 'main' no repositório remoto.
+git push -u origin main 
+
+// Adiciona novas mudanças à área de staging.
+git add .
+
+// Cria um commit que implementa a funcionalidade de batalha entre personagens.
+git commit -m "feat(p1): implementa batalha entre personagens"
+
+// Envia o commit para a branch 'main' no repositório remoto.
+git push -u origin main 
+
+// Cria uma tag 'v2.0.0' para marcar uma nova versão significativa do jogo, com a mensagem que descreve a adição da sobrevivência heroica.
+git tag -a v2.0.0 -m "jogo: implementa sobrevivencia heroica mas, no final, todos morrem"
+
+

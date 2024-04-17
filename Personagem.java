@@ -3,17 +3,19 @@ import java.util.Scanner;
 
 public class Personagem{
   //variáveis de instância(objeto)
-  String nome;
-  int energia;
+  private String nome;
+  private int energia;
   private int fome;
   private int sono;
   private VetorDinamico inventario;
   private static final String[] ITENS_POSSIVEIS = {
     "Javali selvagem", "amora", "batata frita", "cogumelo", "mel"
   };
-  
 
-  
+
+  public String getNome() {
+    return nome;
+  }
 
   //esse é o construtor padrão
   //criado automaticamente pelo compilador, ainda que não seja escrito explicitamente
@@ -38,14 +40,14 @@ public class Personagem{
       this.sono = sono;
   }
 
-  String nomear_personagem() {
+  private String nomear_personagem() {
     System.out.println("Digite um nome para o(a) personagem:");
     Scanner leituraTeclado = new Scanner(System.in);
     String nome = leituraTeclado.nextLine();
     return nome;
   }
 
-  void itens_iniciais(){
+   void itens_iniciais(){
     for (int i = 0; i < 4; i++) {
       int aleatorio  = (int) (Math.random() * 5);
       String item = ITENS_POSSIVEIS[aleatorio];
@@ -56,7 +58,7 @@ public class Personagem{
   }
 
 
-  void cacar(){
+  private void cacar(){
     if(energia >= 2){
       System.out.printf("%s esta cacando...\n", nome);
       energia -= 2; // energia = energia - 2;
@@ -74,7 +76,7 @@ public class Personagem{
     sono = sono < 10 ? sono + 1 : sono;
   }
 
-  void comer() {
+  private void comer() {
     if (inventario.estaVazio()) {
       System.out.printf("%s não tem itens para comer\n", nome);
     }
@@ -87,7 +89,7 @@ public class Personagem{
       verificarMorte();
   }
 
-  void dormir(){
+  private void dormir(){
     if(sono >= 1){
       System.out.printf("%s esta dormindo...\n", nome);
       sono -= 1;
@@ -99,24 +101,33 @@ public class Personagem{
     verificarMorte();
   }
 
-  void verificarMorte() {
-    if (energia <= 0) {
-      System.out.printf("%s morreu por falta de energia.\n", nome);
-      System.exit(0); // Encerra o programa
+  public void atacar(Personagem outro) {
+    outro.energia--;
+    if (outro.energia <= 0) {
+      outro.verificarMorte();
     }
   }
+
+
+  public boolean verificarMorte() {
+    if (energia <= 0) {
+      return true;
+    }
+    return false;
+  }
+
 
   public void realizarAcao(Personagem personagem){
     int acao = (int) (Math.random() * 3);
     switch (acao) {
       case 0:
-        personagem.cacar();
+        personagem.dormir();
         break;
       case 1:
-        personagem.comer();
+        personagem.cacar();
         break;
       case 2:
-        personagem.dormir();
+        personagem.comer();
         break;
     }
   }

@@ -2,8 +2,15 @@ import java.util.Scanner;
 
 public class TesteJogo {
     public static void main(String[] args) {
+
         Personagem p1 = new Personagem(10, 2, 1);
+
+        System.out.println("\n" + p1.toString() + "\n");
+
         Personagem p2 = new Personagem(10, 2, 1);
+
+        System.out.println("\n" + p2.toString() + "\n");
+
 
         //         Criação de um Scanner :
         //-----------------------------------------
@@ -11,51 +18,108 @@ public class TesteJogo {
         //-----------------------------------------
 
 
-        //      Mensagem de inicio do game  +  Aguardo de 5 segundos :
+        int contmorreu1 = 1;
+        int contvenceu = 0;
+        int contmorreu2 = 1;
+
+        int Loop = 1;
+
+
+        //        Mensagem de inicio do game  +  Aguardo de 5 segundos :
         //-----------------------------------------------------------------------
+
         System.out.println("Preparem-se o jogo vai começar em 5 segundos!");
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {e.printStackTrace();}
+
         //-----------------------------------------------------------------------
 
 
-        while(true){
+        while(Loop == 1){
 
-            // Ação do personagem 1
-            System.out.println("Vez do(a): " + p1.nome + "\n");
+            // Personagem 1
 
-            System.out.println("Digite:\n\n 1 para --> Cacar | Dormir | Comer \n\n 2 para --> Atacar o(a) " + p2.nome + "\n\n");
-            String digiteP1 = leTeclado.nextLine();
+            if(p1.verificarMorte() == false) {
 
-            switch (digiteP1) {
-            case "1":
-                p1.realizarAcao(p1);
-                break;
-            case "2":
-                //Implementar briga entre os bonecos
-                break;
-            }
-            
-            System.out.println(p1.toString());
+                System.out.println("\nVez do(a): " + p1.getNome() + "\n");
 
-    //--------------------------------------------------------------------------------------------------------------------
+                System.out.println("Digite:\n\n 1 para sortear entre --> Cacar | Dormir | Comer \n\n");
+                String digiteP1 = leTeclado.nextLine();
 
-            // Ação do personagem 2
-            System.out.println("Vez do(a): " + p2.nome + "\n");
-
-            System.out.println("Digite:\n\n 1 para --> Cacar | Dormir | Comer \n\n 2 para --> Atacar o(a) " + p1.nome + "\n\n");
-            String digiteP2 = leTeclado.nextLine();
-
-            switch (digiteP2) {
-                case "1":
-                    p2.realizarAcao(p2);
-                    break;
-                case "2":
-                    //Implementar briga entre os bonecos
-                    break;
+                switch (digiteP1) {
+                    case "1":
+                        p1.realizarAcao(p1);
+                        break;
                 }
-            System.out.println(p2.toString());
+
+                System.out.println(p1.toString());
+
+            }
+            if (p1.verificarMorte() == true && contmorreu1 == 1) {
+                contmorreu1 ++;
+                System.out.println(p1.getNome() + "  M O R R E U !");
+            }
+            if (p1.verificarMorte() == true && contvenceu == 0) {
+                contvenceu ++;
+                System.out.println(p2.getNome() + " CAMPEÂO.  É TETRAAAAA ");
+            }
+
+            // Personagem 2
+
+            if(p2.verificarMorte() == false) {
+
+                System.out.println("\nVez do(a): " + p2.getNome() + "\n");
+
+                System.out.println("Digite:\n\n 1 para sortear entre --> Cacar | Dormir | Comer \n\n");
+                String digiteP2 = leTeclado.nextLine();
+
+                switch (digiteP2) {
+                    case "1":
+                        p2.realizarAcao(p2);
+                        break;
+                }
+
+                System.out.println(p2.toString());
+            }
+            if (p2.verificarMorte() == true && contmorreu2 == 1) {
+                contmorreu2 ++;
+                System.out.println(p2.getNome() + "  M O R R E U !");
+
+            }
+            if (p2.verificarMorte() == true && contvenceu == 0) {
+                contvenceu ++;
+                System.out.println(p1.getNome() + " CAMPEÂO.  É TETRAAAAA ");
+            }
+
+
+
+            // -----------------------------------------------------------------------------------------------------------------------
+
+            else if (p1.verificarMorte() == true && p2.verificarMorte() == true) {
+
+                System.out.println("\n\nTODOS MORRERAM! A VIDA É CRUEL. \n[espere 3 segundos...]\n");
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {e.printStackTrace();}
+
+                System.exit(0);
+            }
+
+            if(p1.verificarMorte() == false && p2.verificarMorte() == false){
+                int sorteio = (int) (Math.random() * 2);
+                if(sorteio == 0){
+                    p1.atacar(p2);
+                    System.out.println(p1.getNome() + " ataca " + p2.getNome());
+                }
+                else{
+                    p2.atacar(p1);
+                    System.out.println(p2.getNome() + " ataca " + p1.getNome());
+                }
+            }
+
         }
 
     }
