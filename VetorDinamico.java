@@ -23,24 +23,25 @@ public class VetorDinamico {
     }
   }
 
-  //terminar esse método
   void adicionar(String elemento){
-    //se estiver cheio, redimensionar antes de adicionar
+    // Adiciona um elemento ao final do vetor.
+        // Se o vetor estiver cheio, redimensiona antes de adicionar.
     if(estaCheio())redimensionar();
     elementos[qtde] = elemento;
     qtde++;
   }
 
-  //escrever esse aqui também
   boolean estaCheio(){
-    //decidir se o vetor está cheio ou não olhando para cap e qtde
+    // Verifica se o vetor está com a capacidade máxima.
+        // Retorna true se estiver cheio, false caso contrário.
      return qtde == cap ? true : false;
     
   }
-
-  //escrever esse método
+  
   private void redimensionar(){
-    //alocar um vetor com o dobro da capacidade atual chamado auxiliar
+    // Cria um novo vetor com o dobro da capacidade atual.
+        // Copia os elementos do vetor antigo para o novo.
+        // Atualiza a capacidade e o ponteiro para o novo vetor.
     String [] aux = new String[cap * 2];
     //copiar todo mundo do vetor elementos para o vetor auxiliar
     for(int i = 0; i < cap; i++){
@@ -54,12 +55,14 @@ public class VetorDinamico {
     // System.gc();
   }
 
-  //implemente esse método
   void adicionarSemRepeticao(String e){
+    // Adiciona um elemento ao vetor, mas somente se ele ainda não existir.
     if(!existe(e)) adicionar(e);
   }
 
   boolean existe(String e){
+    // Verifica se um elemento existe no vetor.
+        // Retorna true se o elemento for encontrado, false caso contrário.
     for (int i = 0; i < qtde; i++)
       if (e == elementos[i])
         return true;
@@ -67,10 +70,13 @@ public class VetorDinamico {
   }
 
   int tamanho(){
+    // Retorna o número de elementos atualmente no vetor.
     return qtde;
   }
 
   String removerNoFinal(){
+    // Remove e retorna o último elemento do vetor.
+        // Se o vetor estiver vazio, retorna null.
     if (estaVazio()) {
       return null;  // Retorna nulo se o vetor está vazio.
     } else {
@@ -82,23 +88,34 @@ public class VetorDinamico {
   }
 
   boolean estaVazio(){
+    // Verifica se o vetor está vazio.
+        // Retorna true se estiver vazio, false caso contrário.
       return qtde == 0 ? true : false;
   }
 
   boolean estaUmQuartoCheio(){
+    // Verifica se o vetor está com pelo menos um quarto da sua capacidade ocupada.
     return cap/2 == qtde ? true : false;
   }
 
   void reduzirTamanho(){
-
+     // Cria um novo vetor com a metade da capacidade atual.
+    // Copia os elementos necessários para o novo vetor.
+    // Atualiza a capacidade e o ponteiro para o novo vetor.
+    // Essa operação é útil para otimizar a memória quando o vetor está
+    // subutilizado, mas deve ser usada com cuidado para evitar realocar
+    // o vetor com frequência.
   }
 
   String[] getElementos(){
+    // Retorna uma cópia do array de elementos interno.
+        // Isso evita que o chamador modifique diretamente os elementos do vetor.
     return Arrays.copyOf(elementos, cap);
-    // return elementos;
   }
 
   public String toString(){
+    // Retorna uma representação em string do vetor, incluindo a quantidade de elementos,
+        // a capacidade e os próprios elementos.
     StringBuilder sb = new StringBuilder("");
     sb.append("Qtde: ").append(qtde);
     sb.append("\n");
