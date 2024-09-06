@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class TesteJogo {
     public static void main(String[] args) {
-
+        // Cria dois personagens com atributos iniciais.
         Personagem p1 = new Personagem(10, 2, 1);
 
         System.out.println("\n" + p1.toString() + "\n");
@@ -11,13 +11,13 @@ public class TesteJogo {
 
         System.out.println("\n" + p2.toString() + "\n");
 
-
+        
         //         Criação de um Scanner :
         //-----------------------------------------
         Scanner leTeclado = new Scanner(System.in);
         //-----------------------------------------
 
-
+        // Inicializa variáveis para controlar o fluxo do jogo e contar mortes e vitórias.
         int contmorreu1 = 1;
         int contvenceu = 0;
         int contmorreu2 = 1;
@@ -27,7 +27,7 @@ public class TesteJogo {
 
         //        Mensagem de inicio do game  +  Aguardo de 5 segundos :
         //-----------------------------------------------------------------------
-
+        
         System.out.println("Preparem-se o jogo vai começar em 5 segundos!");
 
         try {
@@ -36,11 +36,13 @@ public class TesteJogo {
 
         //-----------------------------------------------------------------------
 
-
+        // Loop principal do jogo.
         while(Loop == 1){
+        // Cada iteração do loop representa um turno do jogo.
+        // Os personagens realizam ações até que um deles morra ou ambos morram.
 
             // Personagem 1
-
+            
             if(p1.verificarMorte() == false) {
 
                 System.out.println("\nVez do(a): " + p1.getNome() + "\n");
@@ -96,9 +98,11 @@ public class TesteJogo {
 
 
             // -----------------------------------------------------------------------------------------------------------------------
-
+                
+            // Verifica se ambos os personagens morreram e encerra o jogo.
             else if (p1.verificarMorte() == true && p2.verificarMorte() == true) {
-
+            // O jogo termina quando ambos os personagens morrem.
+            // Exibe uma mensagem e encerra a aplicação.
                 System.out.println("\n\nTODOS MORRERAM! A VIDA É CRUEL. \n[espere 3 segundos...]\n");
 
                 try {
@@ -107,8 +111,11 @@ public class TesteJogo {
 
                 System.exit(0);
             }
-
+            
+            // Se ambos os personagens estiverem vivos, realiza um ataque aleatório.
             if(p1.verificarMorte() == false && p2.verificarMorte() == false){
+                // Escolhe aleatoriamente um personagem para atacar o outro.
+                // Isso simula um combate entre os personagens.
                 int sorteio = (int) (Math.random() * 2);
                 if(sorteio == 0){
                     p1.atacar(p2);
